@@ -1,0 +1,18 @@
+<div class="container-fluid w-75" >
+    <h1>Login</h1>
+    <form [formGroup]="login_form">
+        <div class="mb-3">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" class="form-control" id="username" formControlName="username">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="text" class="form-control" id="password" formControlName="password">
+        </div>
+        <div class="mb-3">
+            <button type="submit" class="btn btn-primary" [disabled]="login_form.invalid">
+                Log-In
+            </button>
+        </div>
+    </form>
+</div>
