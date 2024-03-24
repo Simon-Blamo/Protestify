@@ -1,3 +1,4 @@
+import { UsersService } from './../services/users.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,5 +7,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-header.component.css']
 })
 export class MyHeaderComponent {
+  logged_in: boolean = false;
 
+  constructor(
+    private user_service: UsersService
+  ){}
+  ngOnInit(){
+    this.logged_in = this.user_service.is_logged_in()
+  }
 }

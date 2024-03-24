@@ -10,7 +10,10 @@ class Api::V1::RalliesController < ApplicationController
     if rallies
       render json:rallies, status: 200
     else
-      render json:{ error: "no rallies found"}
+      render json:{error: "no rallies found"}
     end
+  end
+
+  def find_user_rallies
   end
 end

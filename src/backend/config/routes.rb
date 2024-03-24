@@ -10,7 +10,11 @@ Rails.application.routes.draw do
     namespace :v1 do
       # resources :rallies
       get "/rallies", to: "rallies#show_promoted"
-      post "/users", to: "users#create_1"
+      post "/users/creation", to: "users#create_activist"
+      post "/users/auth", to: "users#auth_user"
+      post "/users/login", to: "users#login_user"
+      get "/users/access_emails/:email", to: "users#find_email"
+      get "/users/access_usernames/:username", to: "user#find_username"
     end
   end
 end

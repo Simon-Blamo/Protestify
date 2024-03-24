@@ -1,2 +1,3 @@
-class Activist < User
+class Activist < ApplicationRecord
+  belongs_to :user
 end

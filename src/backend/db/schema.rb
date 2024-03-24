@@ -10,44 +10,53 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_21_233328) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_24_005144) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "activists", force: :cascade do |t|
+    t.boolean "pending_rally"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_activists_on_user_id"
   end
 
   create_table "admins", force: :cascade do |t|
+    t.string "role"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_admins_on_user_id"
   end
 
   create_table "rallies", force: :cascade do |t|
-    t.integer "rally_id"
     t.string "title"
     t.string "description"
     t.string "location"
     t.date "event_date"
-    t.datetime "start_time"
-    t.integer "organizer_id"
+    t.time "start_time"
     t.string "status"
     t.integer "number_of_attendees"
     t.string "attendees"
+    t.bigint "activist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["activist_id"], name: "index_rallies_on_activist_id"
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.string "username"
-    t.string "email"
-    t.string "password"
+    t.string "first_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "username", limit: 8, null: false
+    t.boolean "is_admin?", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "type"
+    t.string "password_hash", null: false
+    t.string "email", null: false
   end
 
+  add_foreign_key "activists", "users"
+  add_foreign_key "admins", "users"
+  add_foreign_key "rallies", "activists"
 end

@@ -2,17 +2,21 @@
     <h3 class="text-uppercase text-decoration-underline text-center">Upcoming Rallies</h3>
     <div class="my-2">
         <div style="background-color: rgb(238, 229, 229); max-height: 500px;" class="overflow-y-auto">
-            <div *ngFor="let rally of rallies">
-                <div>
-                    <h4>{{rally.title}}</h4>
-                    <h5>{{rally.description}}</h5>
-                    <p>{{rally.location}}</p>
-                    <p>{{rally.event_date}}</p>
-                    <h4>{{rally.start_time}}</h4>
-                    <h5>{{rally.number_of_attendees}}</h5>
+            <div *ngIf="rallies && rallies.length > 0">
+                <div *ngFor="let rally of rallies">
+                    <div>
+                        <h4>{{rally.title}}</h4>
+                        <h5>{{rally.description}}</h5>
+                        <p>{{rally.location}}</p>
+                        <p>{{rally.event_date}}</p>
+                        <h4>{{rally.start_time}}</h4>
+                        <h5>{{rally.number_of_attendees}}</h5>
+                    </div>
                 </div>
             </div>
+            <div *ngIf="!rallies || rallies.length === 0">
+                <p>No upcoming rallies found.</p>
+            </div>
         </div>
-        
     </div>
 </div>

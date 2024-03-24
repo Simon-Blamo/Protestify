@@ -20,6 +20,9 @@ export class ListPromotedRalliesComponent {
       rally => {
         this.rallies = rally;
         console.log(this.rallies)
+      },
+      error =>{
+        
       }
     )
   }

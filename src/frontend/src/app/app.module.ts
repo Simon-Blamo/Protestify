@@ -14,6 +14,9 @@ import { MyRegisterComponent } from './my-register/my-register.component';
 import { MyLoginComponent } from './my-login/my-login.component';
 import { MyHomepageComponent } from './my-homepage/my-homepage.component';
 import { MyCongratulationsComponent } from './my-congratulations/my-congratulations.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 @NgModule({
@@ -26,7 +29,11 @@ import { MyCongratulationsComponent } from './my-congratulations/my-congratulati
     MyRegisterComponent,
     MyLoginComponent,
     MyHomepageComponent,
-    MyCongratulationsComponent
+    MyCongratulationsComponent,
+    AdminDashboardComponent,
+    DashboardComponent,
+    LogoutComponent,
+
   ],
   imports: [
     BrowserModule,

@@ -1,2 +1,3 @@
-class Admin < User
+class Admin < ApplicationRecord
+  belongs_to :user
 end
