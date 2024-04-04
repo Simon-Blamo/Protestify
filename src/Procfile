@@ -1,2 +1,2 @@
-web: cd backend && rails s
-frontend: cd frontend && ng serve
+web: cd backend && rails s -p 3001
+frontend: cd frontend && ng serve --disable-host-check --port 3000

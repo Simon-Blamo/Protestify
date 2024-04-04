@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 })
 export class RalliesService {
 
-  url: string = "http://127.0.0.1:3000";
+  url: string = "http://csc415-server22.hpc.tcnj.edu:3001";
   constructor(private http: HttpClient, private router: Router) { }
 
 
