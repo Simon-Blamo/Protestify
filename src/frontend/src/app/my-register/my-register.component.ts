@@ -10,8 +10,8 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 })
 export class MyRegisterComponent {
   register_form: FormGroup = new FormGroup({});
-  email_exists: boolean = false;
-  username_exists: boolean = false;
+  email_exists: any;
+  username_exists: any;
   
   constructor(
     private form_builder: FormBuilder,
@@ -33,8 +33,9 @@ export class MyRegisterComponent {
       const email = control.value;
       this.user_service.check_email(email).subscribe(
         exists => {
-          this.email_exists = exists as boolean;
-          resolve(exists == true ? {email_exists: true}: null);
+          this.email_exists = exists
+          this.email_exists = this.email_exists.exists
+          resolve(this.email_exists == true ? true: false);
         }
       )
     })
@@ -43,10 +44,11 @@ export class MyRegisterComponent {
   validate_username(control: any){
     return new Promise(resolve => {
       const username = control.value;
-      this.user_service.check_email(username).subscribe(
+      this.user_service.check_username(username).subscribe(
         exists => {
-          this.email_exists = exists as boolean;
-          resolve(exists == true ? {username_exists: true}: null);
+          this.username_exists = exists;
+          this.username_exists = this.username_exists.exists;
+          resolve(exists == true ? true: false);
         }
       )
     })

@@ -30,6 +30,52 @@ export class UsersService {
     return this.http.post(this.url+'/api/v1/users/auth', data)
   }
 
+  check_email(email: any){
+    return this.http.get(this.url+'/api/v1/users/access_emails/'+email)
+  }
+
+  check_username(username: any){
+    return this.http.get(this.url+'/api/v1/users/access_usernames/'+ username)
+  }
+
+  get_token(){
+    return localStorage.getItem(this.auth_token_key)
+  }
+
+  get_total_amount_of_users(){
+    return this.http.get(this.url+'/api/v1/users/total');
+  }
+
+  get_user_rallies(data: any){
+    return this.http.post(this.url + '/api/v1/users/rallies', data)
+  }
+
+  get_user_role(){
+    const token = this.get_token()
+    if(token) {
+      this.decoded = jwtDecode(token)
+      return this.decoded.value.is_admin;
+    } else {
+      return false;
+    }
+  }
+
+  get_value_from_token(data: any){
+    const token = this.get_token()
+    if(token){
+      this.decoded = jwtDecode(token)
+      return this.decoded.value[data]
+    }
+  }
+
+  is_logged_in(){
+    const token = this.get_token()
+    if(token){
+      return true;
+    }
+    return false;
+  }
+
   login_user(data: any){
     return this.http.post(this.url+'/api/v1/users/login', data).pipe(
       tap(response => {
@@ -47,34 +93,29 @@ export class UsersService {
     this.router.navigate([''])
   }
 
-  check_email(email: any){
-    return this.http.get(this.url+'/api/v1//users/access_emails/'+email)
-  }
 
-  check_username(username: any){
-    return this.http.get(this.url+'/api/v1/users/access_username/'+ username)
-  }
-
-  get_token(){
-    return localStorage.getItem(this.auth_token_key)
-  }
-
-  get_user_role(){
+  print_token(){
     const token = this.get_token()
-    if(token) {
-      this.decoded = jwtDecode(token)
-      return this.decoded.value.is_admin;
-    } else {
-      return false;
-    }
-  }
-
-  is_logged_in(){
-    const token = this.get_token()
-    console.log(token)
     if(token){
-      return true;
+      this.decoded = jwtDecode(token)
+      console.log(this.decoded.value)
     }
-    return false;
+  }
+
+  update_token(){
+    const token = this.get_token()
+    
+    if(token){
+      this.decoded = jwtDecode(token)
+      this.http.post(this.url+'/api/v1/session/token_update', this.decoded.value).subscribe(
+        response => {
+          this.return_response = response
+          this.decoded = jwtDecode(this.return_response.token)
+          if(this.return_response && this.return_response.token){
+            localStorage.setItem(this.auth_token_key, this.return_response.token);
+          }
+        }
+      )
+    }
   }
 }

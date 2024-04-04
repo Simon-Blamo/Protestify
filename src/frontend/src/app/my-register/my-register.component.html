@@ -15,8 +15,8 @@
             <label for="username" class="form-label">Username</label>
             <input type="text" class="form-control" id="username" formControlName="username">
             <span class="text-danger " *ngIf="register_form.get('username')?.hasError('required') && register_form.get('username')?.touched">This input is required.<br/></span>
-            <span class="text-danger " *ngIf="register_form.get('username')?.invalid && register_form.get('password')?.touched">The username needs a minimum length of 8.<br/></span>
-            <span class="text-danger " *ngIf="username_exists">This username already exists.</span>
+            <span class="text-danger " *ngIf="register_form.get('username')?.invalid && register_form.get('username')?.touched">The username needs a minimum length of 8.<br/></span>
+            <span class="text-danger " *ngIf="username_exists == true">This username already exists.</span>
         </div>
         <div class="mb-3">
             <label for="email" class="form-label">Email</label>
@@ -32,7 +32,7 @@
             <span class="text-danger " *ngIf="register_form.get('password')?.invalid && register_form.get('password')?.touched">The password needs a minimum length of 10.</span>
         </div>
         <div class="mb-3">
-            <button type="submit" class="btn btn-primary" [disabled]="register_form.invalid">
+            <button type="submit" class="btn btn-primary" [disabled]="register_form.invalid || email_exists == true || username_exists == true">
                 Create Account
             </button>
         </div>

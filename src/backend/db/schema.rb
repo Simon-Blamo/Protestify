@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_24_005144) do
+ActiveRecord::Schema[7.1].define(version: 2024_03_24_211501) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,14 +31,14 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_005144) do
   end
 
   create_table "rallies", force: :cascade do |t|
-    t.string "title"
-    t.string "description"
-    t.string "location"
-    t.date "event_date"
-    t.time "start_time"
-    t.string "status"
-    t.integer "number_of_attendees"
-    t.string "attendees"
+    t.string "title", null: false
+    t.string "description", null: false
+    t.string "location", null: false
+    t.date "event_date", null: false
+    t.time "start_time", null: false
+    t.integer "status", default: 0, null: false
+    t.integer "number_of_attendees", default: 0, null: false
+    t.string "attendees", default: "", null: false
     t.bigint "activist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -48,7 +48,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_24_005144) do
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name", default: "", null: false
-    t.string "username", limit: 8, null: false
+    t.string "username", limit: 255, null: false
     t.boolean "is_admin?", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

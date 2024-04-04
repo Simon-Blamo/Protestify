@@ -9,19 +9,26 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminGuard } from './admin.guard';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LogoutComponent } from './logout/logout.component';
+import { PromoteYourRallyComponent } from './promote-your-rally/promote-your-rally.component';
+import { AuthGuard } from './auth.guard';
+import { ActivistGuard } from './activist.guard';
+import { MyRalliesComponent } from './my-rallies/my-rallies.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: MyHomepageComponent
+    component: MyHomepageComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',
-    component: MyLoginComponent
+    component: MyLoginComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
-    component: MyRegisterComponent
+    component: MyRegisterComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'congrats',
@@ -29,7 +36,8 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [ActivistGuard]
   },
   {
     path: 'admin-dashboard',
@@ -39,6 +47,19 @@ const routes: Routes = [
   {
     path: 'logout',
     component: LogoutComponent
+  }, 
+  {
+    path: 'your-rallies',
+    component: MyRalliesComponent
+  },
+  {
+    path: 'create',
+    component: PromoteYourRallyComponent,
+    canActivate: [ActivistGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/dashboard'
   }
 
 ];

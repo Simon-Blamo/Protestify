@@ -1,0 +1,117 @@
+<app-my-header></app-my-header>
+<div class="container-fluid w-75">
+  <h1>Promote Your Rally</h1>
+  <div *ngIf="has_pending == true" class="p-3 mb-2 bg-danger text-white">
+    You have already submitted rally with a pending status. You will be unable
+    to suggest another rally, until an admin makes a decision about your pending
+    rally.
+  </div>
+  <form [formGroup]="rally_creation_form" (ngSubmit)="on_submit()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title"
+        placeholder="Enter Title Here"
+        formControlName="title"
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('title')?.hasError('required') &&
+          rally_creation_form.get('title')?.touched
+        "
+        >This input is required.</span
+      >
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea
+        type="text"
+        class="form-control"
+        id="description"
+        placeholder="Enter a minimum of 50 characters for the description"
+        formControlName="description"
+      ></textarea>
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('description')?.hasError('required') &&
+          rally_creation_form.get('description')?.touched
+        "
+        >This input is required.</span
+      >
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('description')?.hasError('minlength') &&
+          rally_creation_form.get('description')?.touched
+        "
+        >This field needs at minimum 50 characters.</span
+      >
+    </div>
+    <div class="mb-3">
+      <label for="location" class="form-label">Location</label>
+      <input
+        formControlName="location"
+        class="form-control"
+        ngx-google-places-autocomplete
+        #placeRef="ngx-places"
+        (onAddressChange)="AddressChange($event)"
+      />
+      <!-- <input type="text" class="form-control" id="location" placeholder="Enter Location" formControlName="location"> -->
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('location')?.hasError('required') &&
+          rally_creation_form.get('location')?.touched
+        "
+        >This input is required.<br
+      /></span>
+    </div>
+    <div class="mb-3">
+      <label for="event_date" class="form-label">Event Date</label>
+      <input
+        type="date"
+        class="form-control"
+        id="event_date"
+        formControlName="event_date"
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('event_date')?.hasError('required') &&
+          rally_creation_form.get('event_date')?.touched
+        "
+        >This input is required.<br
+      /></span>
+    </div>
+    <div class="mb-3">
+      <label for="start_time" class="form-label">Start Time</label>
+      <input
+        type="time"
+        class="form-control"
+        id="start_time"
+        formControlName="start_time"
+      />
+      <span
+        class="text-danger"
+        *ngIf="
+          rally_creation_form.get('start_time')?.hasError('required') &&
+          rally_creation_form.get('start_time')?.touched
+        "
+        >This input is required.<br
+      /></span>
+    </div>
+    <div class="mb-3">
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="has_pending == true || rally_creation_form.invalid"
+      >
+        Submit Rally
+      </button>
+    </div>
+  </form>
+</div>

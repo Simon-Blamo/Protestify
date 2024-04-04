@@ -9,12 +9,20 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       # resources :rallies
-      get "/rallies", to: "rallies#show_promoted"
+      get "/rallies/:status", to: "rallies#fetch_by_status"
+      get "/rallies", to: "rallies#all_rallies_length"
+      post "/rallies", to: "rallies#create"
+      post "/rallies/:id", to: "rallies#edit_status"
+
       post "/users/creation", to: "users#create_activist"
       post "/users/auth", to: "users#auth_user"
       post "/users/login", to: "users#login_user"
       get "/users/access_emails/:email", to: "users#find_email"
-      get "/users/access_usernames/:username", to: "user#find_username"
+      get "/users/access_usernames/:username", to: "users#find_username"
+      get "/users/total", to: "users#all_activists_length"
+      post "/users/rallies", to: "users#get_all_rallies"
+
+      post "/session/token_update", to: "sessions#update_token"
     end
   end
 end

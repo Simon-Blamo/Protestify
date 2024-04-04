@@ -8,11 +8,13 @@ import { Component } from '@angular/core';
 })
 export class MyHeaderComponent {
   logged_in: boolean = false;
+  is_admin: boolean = false;
 
   constructor(
     private user_service: UsersService
   ){}
   ngOnInit(){
     this.logged_in = this.user_service.is_logged_in()
+    this.is_admin = this.user_service.get_user_role()
   }
 }

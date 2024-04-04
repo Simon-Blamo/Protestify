@@ -1,0 +1,78 @@
+<div 
+  style="font-family: 'Josefin Sans', sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;" 
+  class="p-4"
+>
+  <h1 class="text-uppercase text-center fw-bold">Submitted Rallies({{rallies.length}})</h1>
+  <div *ngIf="rallies && rallies.length > 0">
+    <div class="overflow-y-scroll w-100 py-3" style="max-height: 600px;">
+      <div *ngFor="let rally of rallies; let i = index" class="d-flex justify-content-center">
+        <div
+          class="rounded my-3 p-4"
+          style="width: 90%; box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2); background-color:white;"
+        >
+          <div class="d-flex">
+            <p style="width: 80%;">
+              <button 
+                class="" 
+                type="button" 
+                data-bs-toggle="collapse" 
+                attr.data-bs-target="#{{'pending_body'+i}}" 
+                aria-expanded="false" 
+                attr.aria-controls="{{'pending_body'+i}}"
+                style="background-color: white; width: 100%; border: 0px;"
+              >
+                <h3 style="text-align: left;">{{ rally.title }} </h3>
+                <div class="d-flex">
+                  <fa-icon [icon]="faUser" class="me-1"></fa-icon>
+                  <h5>{{ rally.owner}}</h5>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex  me-2">
+                    <fa-icon [icon]="faClock" class="me-1"></fa-icon>
+                    <h5>{{ rally.start_time }}</h5>
+                  </div>
+                  <div class="d-flex">
+                    <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
+                    <p>{{ rally.event_date }}</p>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <fa-icon [icon]="faEarthAmericas" class="me-1"></fa-icon>
+                  <h5 class="text-start">{{ rally.location }}</h5>
+                </div>
+              </button>
+            </p>
+              <div class="">
+                <button (click)="submit_decision(rally.id, true, rally.activist_id)" id="{{'approve_button-'+i}}" type="button" class="btn btn-success d-flex w-100 mb-2">
+                  <div class="d-flex">
+                    <fa-icon [icon]="faCheck" class="me-1"></fa-icon>
+                    <p class="my-0 text-uppercase">Approve</p>
+                  </div>
+                </button>
+                <button (click)="submit_decision(rally.id, false, rally.activist_id)" id="{{'disapprove_button-'+i}}" type="button" class="btn btn-danger d-flex w-100">
+                  <div class="d-flex">
+                    <fa-icon [icon]="faX" class="me-1"></fa-icon>
+                    <p class="my-0 text-uppercase">Deny</p>
+                  </div>
+                </button>
+              </div>
+          </div>
+          
+          <div class="collapse" id="{{'pending_body'+i}}">
+            <div class="card card-body">
+              {{ rally.description }}
+            </div>
+          </div>
+          <div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="rallies.length == 0">
+    <p>No pending rallies.</p>
+  </div>
+</div>

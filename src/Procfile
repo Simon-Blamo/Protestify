@@ -1,0 +1,2 @@
+web: cd backend && rails s
+frontend: cd frontend && ng serve

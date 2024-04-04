@@ -34,11 +34,9 @@ export class MyLoginComponent {
     this.user_service.auth_user(this.login_form.value).subscribe(
       response => {
         this.data = response
-        console.log(this.data)
         if(this.data && this.data.hasOwnProperty('error')){
           this.invalid_credentials = true
         } else if(this.data && this.data.hasOwnProperty('success')){
-          console.log("HERO")
           this.user_service.login_user(this.login_form.value).subscribe(
             response2 =>{
               if(this.user_service.get_user_role()){
