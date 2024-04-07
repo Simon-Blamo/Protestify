@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       get "/rallies", to: "rallies#all_rallies_length"
       post "/rallies", to: "rallies#create"
       post "/rallies/:id", to: "rallies#edit_status"
+      post "/rallies/attendance/change", to: "rallies#edit_attendance_record" 
 
       post "/users/creation", to: "users#create_activist"
       post "/users/auth", to: "users#auth_user"

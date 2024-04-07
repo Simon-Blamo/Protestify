@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class AuthorizationService {
-  url: string = "http://127.0.0.1:3001";
+  url: string = "http://csc415-server22.hpc.tcnj.edu:3001";
 
   constructor(private http: HttpClient) { }
 

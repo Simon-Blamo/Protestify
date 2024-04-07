@@ -1,7 +1,7 @@
 import { UsersService } from './../services/users.service';
 import { Component } from '@angular/core';
 import { RalliesService } from './../services/rallies.service';
-import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-my-rallies',
@@ -21,6 +21,7 @@ export class MyRalliesComponent {
   faCheck = faCheck;
   faX = faX;
   faUser = faUser;
+  faUserGroup = faUserGroup;
 
   constructor(private user_service: UsersService){}
 
@@ -44,12 +45,40 @@ export class MyRalliesComponent {
             this.rejected_rallies.push(item)
           } else if(item.status == 3){
             this.promoted_rallies.push(item)
+            if (item.attendees != ""){
+              item.attendees = JSON.parse(item.attendees)
+            }
           } else if(item.status == 4){
             this.passed_rallies.push(item)
+            if (item.attendees != ""){
+              item.attendees = JSON.parse(item.attendees)
+            }
           }
         }
       }
     )
+  }
+
+  change_text(button: any){
+    if(button.innerHTML == "+"){
+      button.innerHTML = "-"
+    } else {
+      button.innerHTML = "+"
+    }
+  }
+  locate_text(event:any){
+    let button;
+    if(event.target.id.includes("promoted")) {
+      button = document.getElementById('promoted-rally-toggle')!
+    } else if(event.target.id.includes("rejected")){
+      button = document.getElementById('rejected-rally-toggle')!
+    } else if(event.target.id.includes("passed")) {
+      button = document.getElementById('passed-rally-toggle')!
+    } else if(event.target.id.includes("pending")) {
+      button = document.getElementById('pending-rally-toggle')!
+    }
+    this.change_text(button)
+
   }
 
 }

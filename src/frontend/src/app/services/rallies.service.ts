@@ -15,6 +15,10 @@ export class RalliesService {
     return this.http.post(this.url+'/api/v1/rallies/'+data.id, data)
   }
 
+  change_rally_attendance(data: any){
+    return this.http.post(this.url+`/api/v1/rallies/attendance/change`, data)
+  }
+
   create_rally(data: any){
     return this.http.post(this.url+'/api/v1/rallies', data)
   }
@@ -25,6 +29,10 @@ export class RalliesService {
 
   list_rallies(data: any){
     return this.http.get(this.url + '/api/v1/rallies/' + data)
+  }
+
+  update_rallies(data: any){
+    return this.http.post(this.url + '/rallies/attendance', data)
   }
 
   

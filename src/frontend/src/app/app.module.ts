@@ -31,6 +31,9 @@ import { MyAdminStatsComponent } from './my-admin-stats/my-admin-stats.component
 import { MyRalliesComponent } from './my-rallies/my-rallies.component';
 import { GooglePlaceModule } from "ngx-google-places-autocomplete";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MyRallyMapComponent } from './my-rally-map/my-rally-map.component';
+import { MyGetStartedComponent } from './my-get-started/my-get-started.component';
+
 
 
 @NgModule({
@@ -52,6 +55,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ListPendingRalliesComponent,
     MyAdminStatsComponent,
     MyRalliesComponent,
+    MyRallyMapComponent,
+    MyGetStartedComponent,
 
   ],
   imports: [

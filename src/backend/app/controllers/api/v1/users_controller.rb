@@ -58,8 +58,11 @@ include ActionController::Cookies
       length = rallies.length
       for object in 0..length-1 do
         rallies[object] = rallies[object].attributes
+        attendance_record = AttendanceRecord.find_by(rally_id: rallies[object]["id"])
         rallies[object]["start_time"] = rallies[object]["start_time"].strftime("%I:%M %p")
         rallies[object]["owner"] = User.find(Activist.find(rallies[object]["activist_id"]).user_id).username
+        rallies[object]["attendance_number"] = attendance_record.attendance_number
+        rallies[object]["attendees"] = attendance_record.attendees
       end
       render json: rallies, status:200
     else

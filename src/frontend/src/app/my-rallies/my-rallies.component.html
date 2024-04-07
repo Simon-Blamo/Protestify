@@ -1,7 +1,7 @@
-<div>
-    <app-my-header></app-my-header>
-    <div class="py-3 ">
-        <div id="rallies_container" class="d-flex justify-content-center w-100 overflow-y-scroll">
+<div class="d-flex flex-column h-100">
+    <app-my-header style="flex: 0 1;"></app-my-header>
+    <div class="py-3 " style="flex: 1 1;">
+        <div id="rallies_container" class="d-flex justify-content-center w-100 overflow-y-auto" style="max-height: 80%;">
             <div class="w-75">
                 <section id="pending_section" class="p-2" style="border-bottom: 1px solid black;">
                     <div *ngIf="pending_rallies.length == 0" class="d-flex justify-content-between text-secondary ">
@@ -17,57 +17,59 @@
                             <h2> 
                                 <em class="d-flex">Pending Rallies <p class="ms-1">({{pending_rallies.length}})</p></em> 
                             </h2>
-                            <button type="button" data-bs-toggle="collapse" data-target="#pending_rallies_container" aria-expanded="false" aria-controls="pending_rallies_container">
-                                <h2>
-                                    <em class="d-flex">+</em>
+                            <input type="checkbox" [checked]="false" (change)="locate_text($event)" class="" id="pending-rally-checkbox" style="height: fit-content; display:none;" data-bs-toggle="collapse" data-bs-target="#pending_rallies_container" aria-expanded="false" aria-controls="pending_rallies_container">
+                            <label for="pending-rally-checkbox">
+                                <h2> 
+                                    <em class="d-flex" id="pending-rally-toggle">+</em> 
                                 </h2>
-                            </button>
+                            </label>
                         </div>
-                        
-
-                        <div *ngFor="let rally of pending_rallies; let i = index" class="d-flex" id="pending_rallies_container">
-                            <div
-                                class="rounded my-3 p-4"
-                                style="width: 90%; box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2); background-color:white;"
-                            >
-                            <p class="w-100">
-                                <button 
-                                    class="" 
-                                    type="button" 
-                                    data-bs-toggle="collapse" 
-                                    attr.data-bs-target="#{{'pending_body'+i}}" 
-                                    aria-expanded="false" 
-                                    attr.aria-controls="{{'pending_body'+i}}"
-                                    style="background-color: white; width: 100%; border: 0px;"
+                        <div class="collapse" id="pending_rallies_container">
+                            <div *ngFor="let rally of pending_rallies; let i = index">
+                                <div
+                                    class="rounded my-3 p-4"
+                                    style="width: 90%; box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2); background-color:white;"
                                 >
-                                    <h3 style="text-align: left;">{{ rally.title }} </h3>
-                                    <div class="d-flex">
-                                        <fa-icon [icon]="faUser" class="me-1"></fa-icon>
-                                        <h5>{{ rally.owner}}</h5>
-                                    </div>
-                                    <div class="d-flex">
-                                        <div class="d-flex  me-2">
-                                            <fa-icon [icon]="faClock" class="me-1"></fa-icon>
-                                            <h5 class="mb-2">{{ rally.start_time }}</h5>
+                                    <p class="w-100">
+                                        <button 
+                                            class="" 
+                                            type="button" 
+                                            data-bs-toggle="collapse" 
+                                            attr.data-bs-target="#{{'pending_body'+i}}" 
+                                            aria-expanded="false" 
+                                            attr.aria-controls="{{'pending_body'+i}}"
+                                            style="background-color: white; width: 100%; border: 0px;"
+                                        >
+                                            <h3 style="text-align: left;">{{ rally.title }} </h3>
+                                            <div class="d-flex">
+                                                <fa-icon [icon]="faUser" class="me-1"></fa-icon>
+                                                <h5>{{ rally.owner}}</h5>
+                                            </div>
+                                            <div class="d-flex">
+                                                <div class="d-flex  me-2">
+                                                    <fa-icon [icon]="faClock" class="me-1"></fa-icon>
+                                                    <h5 class="mb-2">{{ rally.start_time }}</h5>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
+                                                    <p class="m-0">{{ rally.event_date }}</p>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex">
+                                                <fa-icon [icon]="faEarthAmericas" class="me-1"></fa-icon>
+                                                <h5>{{ rally.location }}</h5>
+                                            </div>
+                                        </button>
+                                    </p>
+                                    <div class="collapse" id="{{'pending_body'+i}}">
+                                        <div class="card card-body">
+                                            {{ rally.description }}
                                         </div>
-                                        <div class="d-flex">
-                                            <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
-                                            <p class="m-0">{{ rally.event_date }}</p>
-                                        </div>
                                     </div>
-                                    <div class="d-flex">
-                                        <fa-icon [icon]="faEarthAmericas" class="me-1"></fa-icon>
-                                        <h5>{{ rally.location }}</h5>
-                                    </div>
-                                </button>
-                            </p>
-                            <div class="collapse" id="{{'pending_body'+i}}">
-                                <div class="card card-body">
-                                    {{ rally.description }}
                                 </div>
                             </div>
-                            </div>
                         </div>
+                        
                     </div>
                 </section>
                 <section id="rejecting_section" class="p-2" style="border-bottom: 1px solid black;">
@@ -84,11 +86,12 @@
                             <h2> 
                                 <em class="d-flex">Rejected Rallies <p class="ms-1">({{rejected_rallies.length}})</p></em> 
                             </h2>
-                            <button type="button" class="bg-white border-0" data-bs-toggle="collapse" data-bs-target="#rejected_rallies_container" aria-expanded="false" aria-controls="rejected_rallies_container">
+                            <input type="checkbox" [checked]="false" (change)="locate_text($event)" class="" id="rejected-rally-checkbox" style="height: fit-content; display:none;" data-bs-toggle="collapse" data-bs-target="#rejected_rallies_container" aria-expanded="false" aria-controls="rejected_rallies_container">
+                            <label for="rejected-rally-checkbox">
                                 <h2> 
-                                    <em class="d-flex">+</em> 
+                                    <em class="d-flex" id="rejected-rally-toggle">+</em> 
                                 </h2>
-                            </button>
+                            </label>
                         </div>
                         <div class="collapse" id="rejected_rallies_container">
                             <div *ngFor="let rally of rejected_rallies; let i = index" class="w-100">
@@ -152,11 +155,12 @@
                             <h2> 
                                 <em class="d-flex">Promoted Rallies <p class="ms-1">({{promoted_rallies.length}})</p></em> 
                             </h2>
-                            <button type="button" class="bg-white border-0" data-bs-toggle="collapse" data-bs-target="#promoted_rallies_container" aria-expanded="false" aria-controls="promoted_rallies_container">
+                            <input type="checkbox" [checked]="false" (change)="locate_text($event)" class="" id="promoted-rally-checkbox" style="height: fit-content; display:none;" data-bs-toggle="collapse" data-bs-target="#promoted_rallies_container" aria-expanded="false" aria-controls="promoted_rallies_container">
+                            <label for="promoted-rally-checkbox">
                                 <h2> 
-                                    <em class="d-flex">+</em> 
+                                    <em class="d-flex" id="promoted-rally-toggle">+</em> 
                                 </h2>
-                            </button>
+                            </label>
                         </div>
                         <div class="collapse" id="promoted_rallies_container">
                             <div *ngFor="let rally of promoted_rallies; let i = index" class="">
@@ -196,8 +200,21 @@
                                     </button>
                                 </p>
                                 <div class="collapse" id="{{'promoted_body'+i}}">
-                                    <div class="card card-body">
-                                        {{ rally.description }}
+                                    <div class="card card-body d-flex flex-row" style="max-height: 400px;">
+                                        <div class="w-50">
+                                            {{ rally.description }}
+                                        </div>
+                                        <div class="w-50 overflow-y-scroll d-flex flex-column">
+                                            <div class="d-flex">
+                                                <fa-icon [icon]="faUserGroup" class="me-1"></fa-icon>
+                                                <h5>{{ rally.attendance_number }}</h5>
+                                            </div>
+                                            <div *ngIf="rally.attendees != ''">
+                                                <div *ngFor="let attendee of rally.attendees">
+                                                    <p>{{attendee}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 </div>
@@ -220,11 +237,12 @@
                             <h2> 
                                 <em class="d-flex">Passed Rallies <p class="ms-1">({{passed_rallies.length}})</p></em> 
                             </h2>
-                            <button type="button" class="bg-white border-0" data-bs-toggle="collapse" data-bs-target="#passed_rallies_container" aria-expanded="false" aria-controls="passed_rallies_container">
+                            <input type="checkbox" [checked]="false" (change)="locate_text($event)" class="" id="passed-rally-checkbox" style="height: fit-content; display:none;" data-bs-toggle="collapse" data-bs-target="#passed_rallies_container" aria-expanded="false" aria-controls="passed_rallies_container">
+                            <label for="passed-rally-checkbox">
                                 <h2> 
-                                    <em class="d-flex">+</em> 
+                                    <em class="d-flex" id="passed-rally-toggle">+</em> 
                                 </h2>
-                            </button>
+                            </label>
                         </div>
                     </div>
                     <div class="collapse" id="passed_rallies_container">
@@ -265,8 +283,21 @@
                                 </button>
                             </p>
                             <div class="collapse" id="{{'passed_body'+i}}">
-                                <div class="card card-body">
-                                    {{ rally.description }}
+                                <div class="card card-body d-flex flex-row" style="max-height: 400px;">
+                                    <div class="w-50">
+                                        {{ rally.description }}
+                                    </div>
+                                    <div class="w-50 overflow-y-scroll d-flex flex-column">
+                                        <div class="d-flex">
+                                            <fa-icon [icon]="faUserGroup" class="me-1"></fa-icon>
+                                            <h5>{{ rally.attendance_number }}</h5>
+                                        </div>
+                                        <div *ngIf="rally.attendees != ''">
+                                            <div *ngFor="let attendee of rally.attendees">
+                                                <p>{{attendee}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             </div>

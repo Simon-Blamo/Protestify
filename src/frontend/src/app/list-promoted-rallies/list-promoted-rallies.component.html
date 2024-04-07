@@ -5,12 +5,15 @@
       font-optical-sizing: auto;
       font-style: normal;
     "
+    class="w-100 h-100 d-flex flex-column"
   >
-    <h1 class="text-uppercase text-center fw-bold pt-3">Upcoming Rallies</h1>
+    <div class="pt-3 w-100">
+      <h1 class="text-uppercase text-center fw-bold">Upcoming Rallies</h1>
+    </div>
     <div
       *ngIf="rallies && rallies.length > 0"
       style="max-height: 600px"
-      class="overflow-y-scroll py-3"
+      class="overflow-y-auto py-3"
     >
       <div
         *ngFor="let rally of rallies; let i = index"
@@ -24,7 +27,7 @@
             background-color: white;
           "
         >
-          <p class="w-100">
+          <p *ngIf="is_logged == false || (is_logged == true && rally.ownsThisRally == true)" class="w-100">
             <button
               class=""
               type="button"
@@ -46,7 +49,7 @@
                 </div>
                 <div class="d-flex">
                   <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
-                  <p class="m-0">{{ rally.event_date }}</p>
+                  <h5 class="m-0">{{ rally.event_date }}</h5>
                 </div>
               </div>
               <div class="d-flex">
@@ -55,16 +58,83 @@
               </div>
             </button>
           </p>
+          <div *ngIf=" is_logged == true &&(rally.hasOwnProperty('ownsThisRally') && (rally.ownsThisRally == false) )" class="d-flex w-100">
+            <p style="width: 80%;">
+              <button
+                class=""
+                type="button"
+                data-bs-toggle="collapse"
+                attr.data-bs-target="#{{ 'promoted_body' + i }}"
+                aria-expanded="false"
+                attr.aria-controls="{{ 'promoted_body' + i }}"
+                style="background-color: white; width: 100%; border: 0px"
+              >
+                <h3 style="text-align: left">{{ rally.title }}</h3>
+                <div class="d-flex">
+                  <fa-icon [icon]="faUser" class="me-1"></fa-icon>
+                  <h5>{{ rally.owner }}</h5>
+                </div>
+                <div class="d-flex">
+                  <div class="d-flex me-2">
+                    <fa-icon [icon]="faClock" class="me-1"></fa-icon>
+                    <h5 class="mb-2">{{ rally.start_time }}</h5>
+                  </div>
+                  <div class="d-flex">
+                    <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
+                    <h5 class="m-0">{{ rally.event_date }}</h5>
+                  </div>
+                </div>
+                <div class="d-flex">
+                  <fa-icon [icon]="faEarthAmericas" class="me-1"></fa-icon>
+                  <h5 class="text-start">{{ rally.location }}</h5>
+                </div>
+              </button>
+            </p>
+            <div class="d-flex justify-content-center align-items-center" style="width: 20%;">
+              <div *ngIf="rally.attending_rally == true">
+                <input type="checkbox" [checked]="rally.attending_rally" (change)="update_attendees($event, rally.id, current_user, i)" class="" id="{{'rally-'+i+'-checkbox'}}" style="height: fit-content; display:none;">
+                <label id="{{'rally-'+i+'-checkbox-label'}}" for="{{'rally-'+i+'-checkbox'}}" class="btn btn-success" style="height: fit-content;">
+                  Attending!
+                </label>
+              </div>
+              <div *ngIf="rally.attending_rally == false" >
+                <input type="checkbox" [checked]="rally.attending_rally" (change)="update_attendees($event, rally.id, current_user, i)" class="" id="{{'rally-'+i+'-checkbox'}}" style="height: fit-content; display:none;">
+                <label id="{{'rally-'+i+'-checkbox-label'}}" for="{{'rally-'+i+'-checkbox'}}" class="btn btn-primary" style="height: fit-content;">
+                  Attending?
+                </label>
+              </div>
+            </div>
+
+          </div>
+          
+
           <div class="collapse" id="{{ 'promoted_body' + i }}">
             <div class="card card-body">
-              {{ rally.description }}
+              <div *ngIf="is_logged == false">
+                {{ rally.description }}
+              </div>
+              <div *ngIf="is_logged == true">
+                <div class="mb-3">
+                  {{ rally.description }}
+                </div>
+                <div>
+                  <app-my-rally-map *ngIf="rally.location" [rally]="rally" [index]="i"></app-my-rally-map>
+                </div>
+              </div>
             </div>
+            
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="rallies.length == 0">
-      <p>No upcoming rallies found.</p>
+    <div *ngIf="rallies.length == 0" class="text-secondary fw-bolder d-flex justify-content-center align-items-center" style="flex: 1 1 auto;">
+      <div>
+        <h1 class="text-center">No upcoming rallies being promoted.</h1>
+        <h1 class="text-center">Be the change that's needed now!</h1>
+      </div>
+    </div>
+    <div *ngIf="rallies.length == 0" style="flex: 0 1 15%;">
+
     </div>
   </div>
 </div>

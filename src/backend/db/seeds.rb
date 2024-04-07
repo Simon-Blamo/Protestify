@@ -41,14 +41,18 @@ Admin.create(
   pending_rally: true
 )
 
-Rally.create!(
+@rally = Rally.create!(
   title: "Example Title 1",
   description: "Example Description",
-  location: "Example Location",
+  location: "1111 S Figueroa St, Los Angeles, CA 90015",
   event_date: Date.parse("2024-04-04"),
   start_time: DateTime.parse("2024-04-04 13:00"),
   status: 0,
   activist_id: @activist.id
+)
+
+AttendanceRecord.create!(
+  rally_id: @rally.id,
 )
 
 @user = User.create!(
@@ -65,15 +69,20 @@ Rally.create!(
   pending_rally: true
 )
 
-Rally.create!(
+@rally = Rally.create!(
   title: "Example Title 2",
   description: "Example Description",
-  location: "Example Location",
+  location: "20 W 34th St., New York, NY 10001",
   event_date: Date.parse("2024-05-24"),
   start_time: DateTime.parse("2024-05-24 10:00"),
   status: 0,
   activist_id: @activist.id
 )
+
+AttendanceRecord.create!(
+  rally_id: @rally.id,
+)
+
 
 @user = User.create!(
   first_name: "Maria",
@@ -89,12 +98,16 @@ Rally.create!(
   pending_rally: true
 )
 
-Rally.create!(
+@rally = Rally.create!(
   title: "Example Title 3",
   description: "Example Description",
-  location: "Example Location",
+  location: "2000 Pennington Rd, Ewing Township, NJ 08628, USA",
   event_date: Date.parse("2024-10-28"),
   start_time: DateTime.parse("2024-10-28 11:00"),
   status: 0,
   activist_id: @activist.id
+)
+
+AttendanceRecord.create!(
+  rally_id: @rally.id,
 )

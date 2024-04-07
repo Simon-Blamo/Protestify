@@ -20,7 +20,7 @@ export class MyLoginComponent {
     private form_builder: FormBuilder,
     private user_service: UsersService,
     private router: Router
-    ){}
+  ){}
 
   ngOnInit(){
     this.login_form = this.form_builder.group({

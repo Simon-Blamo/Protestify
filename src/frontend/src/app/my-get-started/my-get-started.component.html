@@ -1,0 +1,100 @@
+<div id="the-body" class="w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+    <div class="w-75 h-75 bg-white rounded shadow-lg d-flex flex-column justify-content-lg-center ">
+        <div style="height: 8%; " class="d-flex justify-content-center align-items-center" style="">
+            <div class="form-switch d-flex" >
+                <label class="form-check-label me-5" for="flexSwitchCheckDefault">Sign-Up</label>
+                <input class="form-check-input me-2" type="checkbox" role="switch" id="flexSwitchCheckDefault" (change)="change_forms($event)">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Sign-In</label>
+            </div>
+        </div>
+        <div id="form-container" class=" d-flex justify-content-center align-items-center mt-3">
+        
+            <div id="sign-up-container" class="w-75  d-flex justify-content-center align-items-center">
+                <form [formGroup]="register_form" (ngSubmit)="on_submit_register()" class="w-75">
+                    <h2 class="text-center text-uppercase">Create Account</h2>
+                    <div class="mb-2">
+                        <label for="first_name" class="form-label">First Name</label>
+                        <input type="text" class="form-control" id="first_name" formControlName="first_name">
+                        <span class="text-danger " *ngIf="register_form.get('first_name')?.hasError('required') && register_form.get('first_name')?.touched">This input is required.</span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="last_name" class="form-label">Last Name</label>
+                        <input type="text" class="form-control" id="last_name" formControlName="last_name">
+                        <span class="text-danger " *ngIf="register_form.get('last_name')?.hasError('required') && register_form.get('last_name')?.touched">This input is required.</span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="username" class="form-label">Username</label>
+                        <input type="text" class="form-control" id="username" formControlName="username">
+                        <span class="text-danger " *ngIf="register_form.get('username')?.hasError('required') && register_form.get('username')?.touched">This input is required.<br/></span>
+                        <span class="text-danger " *ngIf="register_form.get('username')?.invalid && register_form.get('username')?.touched">The username needs a minimum length of 8.<br/></span>
+                        <span class="text-danger " *ngIf="username_exists == true">This username already exists.</span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" formControlName="email">
+                        <span class="text-danger " *ngIf="register_form.get('email')?.hasError('required') && register_form.get('email')?.touched">This input is required.<br/></span>
+                        <span class="text-danger " *ngIf="register_form.get('email')?.hasError('email') && register_form.get('email')?.touched">Invalid email format.<br/></span>
+                        <span class="text-danger " *ngIf="email_exists == true">This email has already been registered.</span>
+                    </div>
+                    <div class="mb-2">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" id="password" formControlName="password">
+                        <span class="text-danger " *ngIf="register_form.get('password')?.hasError('required') && register_form.get('password')?.touched">This input is required.<br/></span>
+                        <span class="text-danger " *ngIf="register_form.get('password')?.invalid && register_form.get('password')?.touched">The password needs a minimum length of 10.</span>
+                    </div>
+                    <div class="mb-4">
+                        <label for="confirm_password" class="form-label">Confirm Password</label>
+                        <input type="password" class="form-control" id="confirm_password" formControlName="confirm_password">
+                        <span class="text-danger " *ngIf="register_form.get('confirm_password')?.hasError('required') && register_form.get('confirm_password')?.touched">This input is required.<br/></span>
+                        <span class="text-danger " *ngIf="register_form.get('confirm_password')?.hasError('password_mismatch') && register_form.get('confirm_password')?.touched">Both password fields must match.</span>
+                    </div>
+        
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button type="submit" class="btn btn-primary" [disabled]="register_form.invalid">
+                            Sign-Up
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div id="sign-in-container" class="w-75 d-flex justify-content-center align-items-center position-absolute" style="visibility: hidden;">
+                <form [formGroup]="login_form" (ngSubmit)="on_submit_login()" class="w-75 h-100 d-flex flex-column" style="">
+                    <h2 class="text-center text-uppercase h-25">Sign In</h2>
+                    <div class="h-50">
+                        <div class="">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username" formControlName="username">
+                        </div>
+                        <div class="">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" class="form-control mb-2" id="password" formControlName="password">
+                            <div *ngIf="is_submitted == true && invalid_credentials == true" class="p-3 mb-2 bg-danger text-white">
+                                Credentials entered are invalid.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center h-25">
+                        <button type="submit" class="btn btn-primary" style="height: fit-content;" [disabled]="login_form.invalid">
+                            Sign-In
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <!-- <div id="toggle-container">
+                <div id="toggle" style="">
+                    <div class="text-white panel" id="login-toggle">
+                        <h3 >Welcome back!</h3>
+                        <button id="login-btn" (click)="handle_login_btn()">Sign-In</button>
+                    </div>
+                    <div class="text-white panel" id="registration-toggle">
+                        <h3>Be the Change, the World Needs.</h3>
+                        <button id="register-btn" (click)="handle_register_btn()">Sign-Up</button>
+                    </div>
+    
+                </div>
+            </div> -->
+        </div>
+    </div>
+    
+    
+</div>
+

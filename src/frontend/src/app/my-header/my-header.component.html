@@ -6,7 +6,7 @@
     <a
       class="navbar-brand"
       *ngIf="logged_in == true && is_admin == false"
-      href="http://localhost:4200/dashboard"
+      href="http://csc415-server22.hpc.tcnj.edu:3000/dashboard"
     >
       <h1
         style="font-family: 'Bodoni Moda', serif;
@@ -18,7 +18,7 @@
     <a
       class="navbar-brand"
       *ngIf="logged_in == false"
-      href="http://localhost:4200/"
+      href="http://csc415-server22.hpc.tcnj.edu:3000/"
     >
       <h1
         style="font-family: 'Bodoni Moda', serif;
@@ -30,7 +30,7 @@
     <a
       class="navbar-brand"
       *ngIf="logged_in == true && is_admin == true"
-      href="http://localhost:4200/admin-dashboard"
+      href="http://csc415-server22.hpc.tcnj.edu:3000/admin-dashboard"
     >
       <h1
         style="font-family: 'Bodoni Moda', serif;
@@ -52,23 +52,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
-          <li class="nav-item" *ngIf="logged_in == false">
-            <a class="nav-link text-white text-uppercase" href="http://localhost:4200/login"><strong>Login</strong></a>
+          <li class="nav-item me-4" *ngIf="logged_in == false">
+            <h5>
+              <a class="nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/get-started"><strong>Get Started</strong></a>
+            </h5>
           </li>
-          <li class="nav-item" *ngIf="logged_in == false">
-            <a class="pe-4 nav-link text-white text-uppercase" href="http://localhost:4200/register"><strong>Register</strong></a>
+
+          <li class="nav-item" *ngIf="logged_in == true && is_admin == false">
+            <a class="pe-4 nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/"><strong>Dashboard</strong></a>
           </li>
           <li class="nav-item" *ngIf="logged_in == true && is_admin == false">
-            <a class="pe-4 nav-link text-white text-uppercase" href="http://localhost:4200/"><strong>Search</strong></a>
+            <a class="pe-4 nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/"><strong>Search</strong></a>
           </li>
           <li class="nav-item" *ngIf="logged_in == true && is_admin == false">
-            <a class="pe-4 nav-link text-white text-uppercase" href="http://localhost:4200/create"><strong>Promote your Rally</strong></a>
+            <a class="pe-4 nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/create"><strong>Promote your Rally</strong></a>
           </li>
           <li class="nav-item" *ngIf="logged_in == true && is_admin == false">
-            <a class="pe-4 nav-link text-white text-uppercase" href="http://localhost:4200/your-rallies"><strong>Your Rallies</strong></a>
+            <a class="pe-4 nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/your-rallies"><strong>Your Rallies</strong></a>
           </li>
           <li class="nav-item" *ngIf="logged_in == true">
-            <a class="pe-4 nav-link text-white text-uppercase" href="http://localhost:4200/logout"><strong>Logout</strong></a>
+            <a class="pe-4 nav-link text-white text-uppercase" href="http://csc415-server22.hpc.tcnj.edu:3000/logout"><strong>Logout</strong></a>
           </li>
       </ul>
     </div>

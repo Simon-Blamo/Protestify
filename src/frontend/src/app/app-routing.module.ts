@@ -13,6 +13,7 @@ import { PromoteYourRallyComponent } from './promote-your-rally/promote-your-ral
 import { AuthGuard } from './auth.guard';
 import { ActivistGuard } from './activist.guard';
 import { MyRalliesComponent } from './my-rallies/my-rallies.component';
+import { MyGetStartedComponent } from './my-get-started/my-get-started.component';
 
 const routes: Routes = [
   {
@@ -21,13 +22,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'login',
-    component: MyLoginComponent,
-    canActivate: [AuthGuard]
-  },
-  {
-    path: 'register',
-    component: MyRegisterComponent,
+    path: 'get-started',
+    component: MyGetStartedComponent,
     canActivate: [AuthGuard]
   },
   {

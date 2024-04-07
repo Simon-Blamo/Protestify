@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class UsersService {
-  url: string = "http://127.0.0.1:3001";
+  url: string = "http://csc415-server22.hpc.tcnj.edu:3001";
   private readonly auth_token_key = 'auth_token'
   return_response: any;
   decoded: any
