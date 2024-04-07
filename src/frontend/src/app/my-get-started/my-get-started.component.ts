@@ -52,6 +52,7 @@ export class MyGetStartedComponent {
       const email = control.value;
       this.user_service.check_email(email).subscribe(
         exists => {
+          console.log(exists)
           this.email_exists = exists
           this.email_exists = this.email_exists.exists
           resolve(this.email_exists == true ? true: false);
@@ -110,7 +111,7 @@ export class MyGetStartedComponent {
   on_submit_register(): void {
     this.user_service.add_user(this.register_form.value).subscribe(
       data => {
-        this.router.navigate(['/'])
+        this.router.navigate(['/'], {queryParams: {success: true} })
       }
     )
   }
@@ -124,13 +125,11 @@ export class MyGetStartedComponent {
 
   change_forms(event: any){
     if(event.target.checked){
-      console.log("hi")
-      this.the_registration_form.style.visibility = "hidden"
-      this.the_login_form.style.visibility = "visible"
-    } else{
-      console.log("Hello")
       this.the_registration_form.style.visibility = "visible"
       this.the_login_form.style.visibility = "hidden"
+    } else{
+      this.the_registration_form.style.visibility = "hidden"
+      this.the_login_form.style.visibility = "visible"
     }
   }
 

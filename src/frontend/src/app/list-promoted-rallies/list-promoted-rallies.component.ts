@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { RalliesService  } from '../services/rallies.service';
-import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { UsersService } from '../services/users.service';
 
 
@@ -20,6 +20,7 @@ export class ListPromotedRalliesComponent {
   faCheck = faCheck;
   faX = faX;
   faUser = faUser;
+  faUserGroup = faUserGroup;
   
 
   constructor(
@@ -47,7 +48,18 @@ export class ListPromotedRalliesComponent {
         
         for (let i = 0; i < this.rallies.length; i++){
           this.rallies[i].ownsThisRally = (this.current_user == this.rallies[i].owner)
-          this.rallies[i].attending_rally = this.rallies[i].attendees.includes(this.current_user)
+          this.rallies[i].attending_rally = false
+          if(this.rallies[i].attendees != ''){
+            const attendees = JSON.parse(this.rallies[i].attendees)
+            console.log(attendees)
+            for (let j = 0; j < attendees.length; j++){
+              if(attendees[j] == this.current_user){
+                this.rallies[i].attending_rally = true
+              }
+            }
+            // this.rallies[i].attending_rally = this.rallies[i].attendees.includes(this.current_user)
+          }
+          
         }
       }
     )
@@ -61,14 +73,18 @@ export class ListPromotedRalliesComponent {
     }).subscribe(
       response => {
         console.log(response)
-        console.log(index)
         const button = document.getElementById(`rally-${index}-checkbox-label`)!
+        const attendance = document.getElementById(`rally-${index}-attendance_number`)!
         if(event.target.checked == true){
           button.className = "btn btn-success";
           button.innerHTML = "Attending!"
+          const number =  +attendance.innerHTML
+          attendance.innerHTML = ""+(number+1);
         } else {
           button.className = "btn btn-primary";
           button.innerHTML = "Attending?"
+          const number =  +attendance.innerHTML
+          attendance.innerHTML = ""+(number-1);
         }
       }
     )

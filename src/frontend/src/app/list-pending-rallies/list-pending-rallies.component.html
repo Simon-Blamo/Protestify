@@ -4,9 +4,10 @@
   font-style: normal;" 
   class="p-4"
 >
-  <h1 class="text-uppercase text-center fw-bold">Submitted Rallies({{rallies.length}})</h1>
+  <h1 *ngIf="admin_decision == false" class="text-uppercase text-center fw-bold">Submitted Rallies({{rallies.length}})</h1>
+  <h1 *ngIf="admin_decision == true" class="text-uppercase text-center fw-bold">Promoted Rallies({{rallies.length}})</h1>
   <div *ngIf="rallies && rallies.length > 0">
-    <div class="overflow-y-scroll w-100 py-3" style="max-height: 600px;">
+    <div class="overflow-y-scroll w-100 py-3" style="max-height: 500px;">
       <div *ngFor="let rally of rallies; let i = index" class="d-flex justify-content-center">
         <div
           class="rounded my-3 p-4"
@@ -45,16 +46,22 @@
               </button>
             </p>
               <div class="">
-                <button (click)="submit_decision(rally.id, true, rally.activist_id)" id="{{'approve_button-'+i}}" type="button" class="btn btn-success d-flex w-100 mb-2">
+                <button *ngIf="rally.status != 3" (click)="submit_decision(rally.id, true, rally.activist_id)" id="{{'approve_button-'+i}}" type="button" class="btn btn-success d-flex w-100 mb-2">
                   <div class="d-flex">
                     <fa-icon [icon]="faCheck" class="me-1"></fa-icon>
                     <p class="my-0 text-uppercase">Approve</p>
                   </div>
                 </button>
-                <button (click)="submit_decision(rally.id, false, rally.activist_id)" id="{{'disapprove_button-'+i}}" type="button" class="btn btn-danger d-flex w-100">
+                <button *ngIf="rally.status != 3" (click)="submit_decision(rally.id, false, rally.activist_id)" id="{{'disapprove_button-'+i}}" type="button" class="btn btn-danger d-flex w-100">
                   <div class="d-flex">
                     <fa-icon [icon]="faX" class="me-1"></fa-icon>
                     <p class="my-0 text-uppercase">Deny</p>
+                  </div>
+                </button>
+                <button *ngIf="rally.status == 3" (click)="submit_decision(rally.id, false, rally.activist_id)" id="{{'disapprove_button-'+i}}" type="button" class="btn btn-danger d-flex w-100">
+                  <div class="d-flex">
+                    <fa-icon [icon]="faX" class="me-1"></fa-icon>
+                    <p class="my-0 text-uppercase">Remove</p>
                   </div>
                 </button>
               </div>
@@ -72,7 +79,12 @@
       </div>
     </div>
   </div>
-  <div *ngIf="rallies.length == 0">
-    <p>No pending rallies.</p>
+  <div *ngIf="rallies.length == 0"  class="text-secondary fw-bolder d-flex justify-content-center align-items-center" style="flex: 1 1 auto;">
+    <div *ngIf="admin_decision == false">
+      <h2>No pending rallies.</h2>
+    </div>
+    <div *ngIf="admin_decision == true">
+      <h2>No promoted rallies.</h2>
+    </div>
   </div>
 </div>

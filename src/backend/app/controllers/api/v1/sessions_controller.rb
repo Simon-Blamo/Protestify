@@ -1,5 +1,12 @@
+# Project name: Protestify
+# Description: Protestify is a web application, which gives activists the ability to suggest a peaceful protest that can be promoted on the website
+# Filename: sessions_controller.rb
+# Description: This file serves as the controller for session tokens in the protestify application.
+# Last modified on: 04/08/2024
+
 class Api::V1::SessionsController < ApplicationController
 
+  # API call to update a logged-in user's token.
   def update_token
     token = params
     @user = User.find_by(username: token[:username])
@@ -8,16 +15,14 @@ class Api::V1::SessionsController < ApplicationController
   end
 
   private
-  def session_params
-    params.require(:session)
+
+  # function to encrypt data.
+  def encode_token(data)
+    JWT.encode(data, Rails.application.secrets.secret_key_base)
   end
 
-  def encode_token(payload)
-    JWT.encode(payload, Rails.application.secrets.secret_key_base)
-  end
-
+  # function to generate a token that will be sent to the browser.
   def generate_token(user)
-    puts "HI MAN"
     token = encode_token({
       value: {
         id: user.id,

@@ -12,9 +12,19 @@
 
 <div
   *ngIf="is_admin == true"
-  class="d-flex rounded"
+  class="d-flex flex-column rounded"
   style="background-color: #eae8e8; height: 725px"
 >
-  <app-list-pending-rallies *ngIf="is_admin == true" class="w-50 h-100" />
-  <app-my-admin-stats *ngIf="is_admin == true" class="w-50 h-100" />
+  <div class="w-100 d-flex justify-content-center py-3">
+    <div class="form-switch d-flex" >
+      <label class="form-check-label me-5" for="flexSwitchCheckDefault">Submitted</label>
+      <input class="form-check-input me-2" type="checkbox" role="switch" id="flexSwitchCheckDefault" (change)="change_rallies_list($event)" >
+      <label class="form-check-label" for="flexSwitchCheckDefault">Promoted</label>
+    </div>
+  </div>
+  <div class="d-flex w-100 ">
+    <app-list-pending-rallies *ngIf="is_admin == true" class="w-50 h-100" [admin_decision]="admin_selected_promoted" />
+    <app-my-admin-stats *ngIf="is_admin == true" class="w-50 h-100" />
+  </div>
+  
 </div>

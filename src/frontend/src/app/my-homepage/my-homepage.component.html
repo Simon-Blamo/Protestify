@@ -12,5 +12,13 @@
     "
   />
 </div>
-<app-my-header class="position-relative" />
+<app-my-header class="position-relative"/>
+<div *ngIf="successMessage" class="w-100 d-flex justify-content-center">
+  <div class="alert alert-success w-50 d-flex justify-content-between mt-3" style="z-index: 1000;">
+    <div>
+      {{ successMessage }}
+    </div>
+    <button type="button" class="btn-close" aria-label="Close" (click)="dismiss_success_message()"></button>
+  </div>
+</div>
 <app-my-body />

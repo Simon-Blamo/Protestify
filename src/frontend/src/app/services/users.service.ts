@@ -31,7 +31,7 @@ export class UsersService {
   }
 
   check_email(email: any){
-    return this.http.get(this.url+'/api/v1/users/access_emails/'+email)
+    return this.http.post(this.url+'/api/v1/users/access_emails/', {email: email})
   }
 
   check_username(username: any){

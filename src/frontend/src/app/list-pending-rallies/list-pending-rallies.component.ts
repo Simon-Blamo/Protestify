@@ -1,6 +1,6 @@
 import { UsersService } from './../services/users.service';
 import { RalliesService } from './../services/rallies.service';
-import { Component } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -8,7 +8,7 @@ import { faEarthAmericas, faClock, faCalendar, faCheck, faX, faUser } from '@for
   templateUrl: './list-pending-rallies.component.html',
   styleUrls: ['./list-pending-rallies.component.css']
 })
-export class ListPendingRalliesComponent {
+export class ListPendingRalliesComponent implements OnChanges {
   token_data: any;
   rallies: any;
   faEarthAmericas = faEarthAmericas;
@@ -18,23 +18,38 @@ export class ListPendingRalliesComponent {
   faX = faX;
   faUser = faUser;
 
+  @Input() admin_decision: any;
+
 
   constructor(private rallies_service: RalliesService, private user_service: UsersService){}
   
 
   ngOnInit(){
-    this.rallies_list()
-
+    this.rallies_list(0);
   }
 
-  rallies_list(){
-    this.rallies = this.rallies_service.list_rallies(0).subscribe(
+  rallies_list(type: number){
+    this.rallies = this.rallies_service.list_rallies(type).subscribe(
       rally => {
         this.rallies = rally
         console.log(this.rallies)
       }
     )
   }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(changes['admin_decision']){
+      if(changes['admin_decision'].currentValue == true){
+        this.rallies_list(3)
+      } else {
+        this.rallies_list(0)
+
+      }
+      
+    }
+  }
+
+  
 
   submit_decision(rally_id: number, the_decision: boolean, rally_owner: number){
     
@@ -44,7 +59,12 @@ export class ListPendingRalliesComponent {
       activist_id: rally_owner
     }).subscribe(
       response => {
-        this.rallies_list();
+        if(this.admin_decision == false){
+          this.rallies_list(0);
+        } else {
+          this.rallies_list(3);
+        }
+        
       }
     )
   }

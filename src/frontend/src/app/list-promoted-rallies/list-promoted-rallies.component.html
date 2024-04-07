@@ -79,9 +79,13 @@
                     <fa-icon [icon]="faClock" class="me-1"></fa-icon>
                     <h5 class="mb-2">{{ rally.start_time }}</h5>
                   </div>
-                  <div class="d-flex">
+                  <div class="d-flex me-2">
                     <fa-icon [icon]="faCalendar" class="me-1"></fa-icon>
                     <h5 class="m-0">{{ rally.event_date }}</h5>
+                  </div>
+                  <div class="d-flex">
+                    <fa-icon [icon]="faUserGroup" class="me-1"></fa-icon>
+                    <h5 id="{{'rally-' + i + '-attendance_number'}}" class="m-0">{{ rally.attendance_number }}</h5>
                   </div>
                 </div>
                 <div class="d-flex">
@@ -127,14 +131,11 @@
         </div>
       </div>
     </div>
-    <div *ngIf="rallies.length == 0" class="text-secondary fw-bolder d-flex justify-content-center align-items-center" style="flex: 1 1 auto;">
-      <div>
+    <div *ngIf="rallies.length == 0" class="text-secondary fw-bolder d-flex justify-content-center align-items-center">
+      <div class="mt-5">
         <h1 class="text-center">No upcoming rallies being promoted.</h1>
         <h1 class="text-center">Be the change that's needed now!</h1>
       </div>
-    </div>
-    <div *ngIf="rallies.length == 0" style="flex: 0 1 15%;">
-
     </div>
   </div>
 </div>

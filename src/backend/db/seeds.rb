@@ -1,18 +1,9 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+#seed script to populate database upon migration.
 
 include BCrypt
 
-def hash_password(pw)
-  Password.create(pw)
-end
+
+
 
 @user = User.create!(
   first_name: "John",
@@ -30,7 +21,7 @@ Admin.create(
 @user = User.create!(
   first_name: "Jane",
   last_name: "Doe",
-  username: "the_user1",
+  username: "jane_doe",
   is_admin?: false,
   password_hash: hash_password("Password1234"),
   email: "janedoe@example.com"
@@ -58,7 +49,7 @@ AttendanceRecord.create!(
 @user = User.create!(
   first_name: "James",
   last_name: "Smith",
-  username: "the_user2",
+  username: "theJames_Smith",
   is_admin?: false,
   password_hash: hash_password("Password1234"),
   email: "jamessmith@example.com"
@@ -85,12 +76,12 @@ AttendanceRecord.create!(
 
 
 @user = User.create!(
-  first_name: "Maria",
-  last_name: "Garcia",
-  username: "the_user3",
+  first_name: "Sam",
+  last_name: "Blamo",
+  username: "sam_blamo",
   is_admin?: false,
   password_hash: hash_password("Password1234"),
-  email: "mariagarcia@example.com"
+  email: "blamo@example.com"
 )
 
 @activist = Activist.create(
@@ -99,11 +90,11 @@ AttendanceRecord.create!(
 )
 
 @rally = Rally.create!(
-  title: "Example Title 3",
+  title: "Rebuild Forcina!",
   description: "Example Description",
   location: "2000 Pennington Rd, Ewing Township, NJ 08628, USA",
-  event_date: Date.parse("2024-10-28"),
-  start_time: DateTime.parse("2024-10-28 11:00"),
+  event_date: Date.parse("2024-04-08"),
+  start_time: DateTime.parse("2024-04-08 11:00"),
   status: 0,
   activist_id: @activist.id
 )
@@ -111,3 +102,11 @@ AttendanceRecord.create!(
 AttendanceRecord.create!(
   rally_id: @rally.id,
 )
+
+private
+
+
+# function to hash user's password within DB.
+def hash_password(pw)
+  Password.create(pw)
+end
