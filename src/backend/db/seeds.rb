@@ -2,7 +2,9 @@
 
 include BCrypt
 
-
+def hash_password(pw)
+  Password.create(pw)
+end
 
 
 @user = User.create!(
@@ -33,8 +35,8 @@ Admin.create(
 )
 
 @rally = Rally.create!(
-  title: "Example Title 1",
-  description: "Example Description",
+  title: "Rally for Educational Equity",
+  description: "Demand proper funding for our public schools. Every child deserves access to a quality education, regardless of their zip code.",
   location: "1111 S Figueroa St, Los Angeles, CA 90015",
   event_date: Date.parse("2024-04-04"),
   start_time: DateTime.parse("2024-04-04 13:00"),
@@ -61,8 +63,8 @@ AttendanceRecord.create!(
 )
 
 @rally = Rally.create!(
-  title: "Example Title 2",
-  description: "Example Description",
+  title: "Stop the Suffering: Rally Against Animal Cruelty in Research Labs",
+  description: "Animals in research labs deserve compassion and freedom from pain. Join us in demanding an end to cruel testing practices and a shift towards humane research alternatives.",
   location: "20 W 34th St., New York, NY 10001",
   event_date: Date.parse("2024-05-24"),
   start_time: DateTime.parse("2024-05-24 10:00"),
@@ -90,8 +92,8 @@ AttendanceRecord.create!(
 )
 
 @rally = Rally.create!(
-  title: "Rebuild Forcina!",
-  description: "Example Description",
+  title: "Renovate Forcina!",
+  description: "Stand with the CS student body! The Forcina Building has outdated for the last 20 years. We've been promised renovations for years, and still we have yet to seen anything bear fruit from TCNJ's \"promises\". I'm tired of taking a shaky elevator to get to my classes!",
   location: "2000 Pennington Rd, Ewing Township, NJ 08628, USA",
   event_date: Date.parse("2024-04-08"),
   start_time: DateTime.parse("2024-04-08 11:00"),
@@ -100,13 +102,5 @@ AttendanceRecord.create!(
 )
 
 AttendanceRecord.create!(
-  rally_id: @rally.id,
+  rally_id: @rally.id
 )
-
-private
-
-
-# function to hash user's password within DB.
-def hash_password(pw)
-  Password.create(pw)
-end
