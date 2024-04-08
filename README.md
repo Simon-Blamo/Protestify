@@ -16,3 +16,17 @@ Protestify is a full-stack web application developed using Ruby on Rails. It pro
 - **TypeScript**: Client-side scripting for interactivity.
 - **Bootstrap**: Frontend framework for responsive design and UI components.
 - **PostgreSQL**: Databases for storing user data, rally information, and attendance records.
+
+## Diagrams
+
+### Use Case Diagram
+![Use Case Diagram](/docs/SB-files/Use%20Case%20Diagram.png)
+### System State Diagram
+![Create Profile](/docs/SB-files/SSD1.png)
+![Suggest Rally](/docs/SB-files/SSD2.png)
+![Approve/Deny Rally](/docs/SB-files/SSD3.png)
+### State Chart
+![Approve/Deny Rally](/docs/SB-files/State%20Chart.png)
+
+## Use Case
+* [Use Case Description](docs/SB-files/Use%20Case%20Description.pdf)
