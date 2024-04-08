@@ -13,7 +13,7 @@ export class DashboardComponent {
   }
 
   ngOnInit(){
-    this.user_service.update_token()
+    this.user_service.update_user_token();
   }
 
 }

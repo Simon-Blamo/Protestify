@@ -77,7 +77,7 @@ include ActionController::Cookies
         user_rallies[rally_object]["attendance_number"] = attendance_record_for_rally.attendance_number
         user_rallies[rally_object]["attendees"] = attendance_record_for_rally.attendees
       end
-      render json: user_params, status:200
+      render json: user_rallies, status:200
     else
       render json: {failed: "Failure"}, status:404
     end

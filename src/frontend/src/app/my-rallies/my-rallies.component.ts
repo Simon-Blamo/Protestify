@@ -36,7 +36,7 @@ export class MyRalliesComponent {
     }).subscribe(
       response => {
         this.rallies = response;
-        
+        console.log(this.rallies)
         for(let i = 0; i < this.rallies.length; i++){
           let item = this.rallies[i];
           if(item.status == 0){

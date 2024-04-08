@@ -50,7 +50,7 @@ export class UsersService {
     return this.http.post(this.url + '/api/v1/users/rallies', data)
   }
 
-  get_user_role(){
+  is_user_admin(){
     const token = this.get_token()
     if(token) {
       this.decoded = jwtDecode(token)
@@ -102,7 +102,7 @@ export class UsersService {
     }
   }
 
-  update_token(){
+  update_user_token(){
     const token = this.get_token()
     
     if(token){

@@ -95,7 +95,7 @@ export class MyGetStartedComponent {
         } else if(this.login_data && this.login_data.hasOwnProperty('success')){
           this.user_service.login_user(this.login_form.value).subscribe(
             response2 =>{
-              if(this.user_service.get_user_role()){
+              if(this.user_service.is_user_admin()){
                 this.router.navigate(['/admin-dashboard'])
               } else {
                 this.router.navigate(['/dashboard'])

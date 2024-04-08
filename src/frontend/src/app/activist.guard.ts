@@ -10,7 +10,7 @@ export class ActivistGuard implements CanActivate {
   constructor(private user_sevice: UsersService, private router: Router){}
   canActivate(): boolean {
     if(this.user_sevice.is_logged_in()){
-      if(this.user_sevice.get_user_role()){
+      if(this.user_sevice.is_user_admin()){
         this.router.navigate(['/admin-dashboard'])
         return false
       }

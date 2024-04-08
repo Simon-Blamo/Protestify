@@ -31,7 +31,7 @@ export class PromoteYourRallyComponent {
   ){}
 
   ngOnInit(): void {
-    this.user_service.update_token()
+    this.user_service.update_user_token()
     this.has_pending = this.user_service.get_value_from_token('pending_rally')
 
     this.rally_creation_form = this.form_builder.group({

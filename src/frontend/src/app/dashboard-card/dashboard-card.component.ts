@@ -18,7 +18,7 @@ export class DashboardCardComponent {
   }
 
   check_role(){
-    this.is_admin = this.user_service.get_user_role()
+    this.is_admin = this.user_service.is_user_admin()
   }
 
   change_rallies_list(event: any){

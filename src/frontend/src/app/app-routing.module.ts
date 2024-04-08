@@ -1,8 +1,6 @@
-import { MyRegisterComponent } from './my-register/my-register.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MyLoginComponent } from './my-login/my-login.component';
 import { MyHomepageComponent } from './my-homepage/my-homepage.component';
 import { MyCongratulationsComponent } from './my-congratulations/my-congratulations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';

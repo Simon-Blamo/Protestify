@@ -12,7 +12,7 @@ export class AdminGuard implements CanActivate {
   decoded: any
   constructor(private userService: UsersService, private router: Router) {}
   canActivate(): boolean {
-    if(this.userService.get_user_role()){
+    if(this.userService.is_user_admin()){
       return true;
     } else {
       this.router.navigate(['/dashboard'])

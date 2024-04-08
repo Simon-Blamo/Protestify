@@ -15,6 +15,6 @@ export class MyHeaderComponent {
   ){}
   ngOnInit(){
     this.logged_in = this.user_service.is_logged_in()
-    this.is_admin = this.user_service.get_user_role()
+    this.is_admin = this.user_service.is_user_admin()
   }
 }

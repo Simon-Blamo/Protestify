@@ -16,8 +16,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MyAboutComponent } from './my-about/my-about.component';
 import { MyBodyComponent } from './my-body/my-body.component';
-import { MyRegisterComponent } from './my-register/my-register.component';
-import { MyLoginComponent } from './my-login/my-login.component';
 import { MyHomepageComponent } from './my-homepage/my-homepage.component';
 import { MyCongratulationsComponent } from './my-congratulations/my-congratulations.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
@@ -43,8 +41,6 @@ import { MyGetStartedComponent } from './my-get-started/my-get-started.component
     MyHeaderComponent,
     MyAboutComponent,
     MyBodyComponent,
-    MyRegisterComponent,
-    MyLoginComponent,
     MyHomepageComponent,
     MyCongratulationsComponent,
     AdminDashboardComponent,

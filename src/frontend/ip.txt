@@ -3,6 +3,6 @@
     altname enp0s18
     altname ens18
     inet 10.18.6.22/24 brd 10.18.6.255 scope global dynamic noprefixroute eth0
-       valid_lft 27560sec preferred_lft 27560sec
+       valid_lft 26013sec preferred_lft 26013sec
     inet6 fe80::a74a:f08c:e204:8b31/64 scope link noprefixroute 
        valid_lft forever preferred_lft forever
