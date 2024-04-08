@@ -17,6 +17,34 @@ Protestify is a full-stack web application developed using Ruby on Rails. It pro
 - **Bootstrap**: Frontend framework for responsive design and UI components.
 - **PostgreSQL**: Databases for storing user data, rally information, and attendance records.
 
+## Prerequisites
+- Linux Distribution (Ubuntu, Kali, Arch)
+- Ruby (3.2.2)
+- Gem (3.4.10)
+- Ruby on Rails (7.1.3.2)
+- NPM (10.4.0)
+- Angular(15.2)
+
+## Getting Started
+1. Clone the repository:
+   
+   `git clone https://github.com/TCNJ-SE/protestify-24-SB.git`
+
+2. Navigate to the Protestify Directory:
+
+   `cd protestify-24-SB`
+3. Install Dependencies:
+  * For frontend (from protestify-24-SB Directory)
+    * `cd src/frontend`
+    * `npm install`
+  
+  * For backend (from protestify-24-SB Directory)
+      * `cd src/backend`
+      * `bundle install`
+4. Run application:
+  * From frontend directory (protestify-24-SB/src/frontend)
+    * Run command: `npm start`
+
 ## Diagrams
 
 ### Use Case Diagram
