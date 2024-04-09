@@ -56,5 +56,5 @@ Protestify is a full-stack web application developed using Ruby on Rails. It pro
 ### State Chart
 ![Approve/Deny Rally](/docs/SB-files/State%20Chart.png)
 
-## Use Case
-* [Use Case Description](docs/SB-files/Use%20Case%20Description.pdf)
+## Use Cases
+* [Use Case Descriptions](docs/SB-files/Use%20Case%20Description.pdf)
