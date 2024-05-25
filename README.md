@@ -58,3 +58,4 @@ Protestify is a full-stack web application developed using Ruby on Rails. It pro
 
 ## Use Cases
 * [Use Case Descriptions](docs/SB-files/Use%20Case%20Description.pdf)
+
