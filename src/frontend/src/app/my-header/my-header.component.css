@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&display=swap');
+
+
+@media screen and (min-width: 992px) {
+    #navbarNav {
+        position: absolute;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    #navbarNav {
+        position: static;
+        right: auto;
+    }
+}
